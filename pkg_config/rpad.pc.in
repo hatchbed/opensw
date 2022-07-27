@@ -1,0 +1,9 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: rpad
+Description: Open client SDK for communicating with SlamTec rpos framework devices such as the M2M1 mapper.
+Version: @rpad_version@
+Libs: -L${libdir} -lrpad 
+Cflags: @PKG_CONFIG_C_FLAGS@ -I${includedir}

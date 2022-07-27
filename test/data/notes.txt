@@ -1,0 +1,4 @@
+x7F x04 x42: needed
+x7F x05 x51: needed
+x81 x04 x56: needed
+x7F x04 x56: needed -> 4

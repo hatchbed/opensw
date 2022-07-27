@@ -1,0 +1,267 @@
+asyncapi: '2.3.0'
+info:
+  title: Slamware API
+  version: '1.0.0'
+  description: |
+    This API is used to communicate with RPLidar Slamware devices such as the M2M1 mapper.
+components:
+  schemas:
+    area:
+      type: object
+      properties:
+        height:
+          type: number
+        width:
+          type: number
+        x:
+          type: number
+        y:
+          type: number
+      required:
+        - height
+        - width
+        - x
+        - y
+    command:
+      type: string
+      enum:
+        - getlaserscan
+        - getknownarea
+        - getmapdata
+        - getsdpversion
+        - getsystemresource
+    getKnownAreaRequest:
+      type: object
+      properties:
+        args:
+          type: object
+          properties:
+            kind:
+              type: integer
+            partially:
+              type: boolean
+            type:
+              type: integer
+          required:
+            - kind
+            - partially
+            - type
+        command:
+          $ref: '#/components/schemas/command'
+        request_id:
+          $ref: '#/components/schemas/requestId'
+      required:
+        - args
+        - command
+        - request_id
+    getKnownAreaResponse:
+      type: object
+      properties:
+        command:
+          $ref: '#/components/schemas/command'
+        request_id:
+          $ref: '#/components/schemas/requestId'
+        result:
+          type: object
+          properties:
+            code:
+              type: integer
+            max_x:
+              type: number
+            max_y:
+              type: number
+            min_x:
+              type: number
+            min_y:
+              type: number
+            timestamp:
+              type: integer
+          required:
+            - code
+            - max_x
+            - max_y
+            - min_x
+            - min_y
+            - timestamp
+      required:
+        - command
+        - request_id
+        - result
+    getLaserScanResponse:
+      type: object
+      properties:
+        command:
+          $ref: '#/components/schemas/command'
+        request_id:
+          $ref: '#/components/schemas/requestId'
+        result:
+          type: object
+          properties:
+            code:
+              type: integer
+            laser_points:
+              type: string
+            timestamp:
+              type: integer
+            x:
+              type: number
+            y:
+              type: number
+            yaw:
+              type: number
+          required:
+            - code
+            - laser_points
+            - timestamp
+            - x
+            - y
+            - yaw
+      required:
+        - command
+        - request_id
+        - result
+    getMapDataRequest:
+      type: object
+      properties:
+        args:
+          type: object
+          properties:
+            area:
+              $ref: '#/components/schemas/area'
+            kind:
+              type: integer
+            partially:
+              type: boolean
+            type:
+              type: integer
+          required:
+            - area
+            - kind
+            - partially
+            - type
+        command:
+          $ref: '#/components/schemas/command'
+        request_id:
+          $ref: '#/components/schemas/requestId'
+      required:
+        - args
+        - command
+        - request_id
+    getMapDataResponse:
+      type: object
+      properties:
+        command:
+          $ref: '#/components/schemas/command'
+        request_id:
+          $ref: '#/components/schemas/requestId'
+        result:
+          type: object
+          properties:
+            code:
+              type: integer
+            dimension_x:
+              type: integer
+            dimension_y:
+              type: integer
+            map_data:
+              type: string
+            real_x:
+              type: number
+            real_y:
+              type: number
+            resolution:
+              type: number
+            size:
+              type: integer
+            timestamp:
+              type: integer
+            type:
+              type: integer
+          required:
+            - code
+            - dimension_x
+            - dimension_y
+            - map_data
+            - real_x
+            - real_y
+            - resolution
+            - size
+            - timestamp
+            - type
+      required:
+        - command
+        - request_id
+        - result
+    getSdpVersionResponse:
+      type: object
+      properties:
+        command:
+          $ref: '#/components/schemas/command'
+        request_id:
+          $ref: '#/components/schemas/requestId'
+        result:
+          type: object
+          properties:
+            code:
+              type: integer
+            sdp_version:
+              type: string
+            timestamp:
+              type: integer
+          required:
+            - code
+            - sdp_version
+            - timestamp
+      required:
+        - command
+        - request_id
+        - result
+    getSystemResourceResponse:
+      type: object
+      properties:
+        command:
+          $ref: '#/components/schemas/command'
+        request_id:
+          $ref: '#/components/schemas/requestId'
+        result:
+          type: object
+          properties:
+            battery_percentage:
+              type: integer
+            board_temperature10:
+              type: integer
+            code:
+              type: integer
+            dcin_connected:
+              type: integer
+            is_charging:
+              type: integer
+            on_dock:
+              type: integer
+            timestamp:
+              type: integer
+          required:
+            - battery_percentage
+            - board_temperature10
+            - code
+            - dcin_connected
+            - is_charging
+            - on_dock
+            - timestamp
+      required:
+        - command
+        - request_id
+        - result
+    simpleRequest:
+      type: object
+      properties:
+        command:
+          $ref: '#/components/schemas/command'
+        request_id:
+          $ref: '#/components/schemas/requestId'
+      required:
+        - command
+        - request_id
+    requestId:
+      type: integer
+      description: A unique request id

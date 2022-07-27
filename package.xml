@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>rpad</name>
+  <version>0.1.0</version>
+  <description>Open SDK for communicating with SlamTec Slamware devices such as the M2M1 mapper.</description>
+
+  <maintainer email="marcalban@hatchbed.com">Marc Alban</maintainer>
+  <license>BSD</license>
+
+  <buildtool_depend>cmake</buildtool_depend>
+
+  <build_depend>asyncapi_gencpp</build_depend>
+  <build_depend>asio</build_depend>
+  <build_depend>spdlog</build_depend>
+  
+  <depend>opencv</depend>
+    
+  <export>
+    <build_type>cmake</build_type>
+  </export>
+
+</package>
