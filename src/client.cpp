@@ -80,7 +80,7 @@ void Client::disconnect() {
 std::optional<std::string> Client::getSdpVersion() {
     msg::SimpleRequest req;
     req.request_id = id_dist_(rng_);
-    req.command = "getsdpversion";
+    req.command = CMD_GET_SPD_VERSION;
     auto resp = sendAndReceive(req.dump());
     if (!resp) {
         return {};
@@ -97,7 +97,7 @@ std::optional<std::string> Client::getSdpVersion() {
 std::optional<int> Client::getBatteryPercentage() {
     msg::SimpleRequest req;
     req.request_id = id_dist_(rng_);
-    req.command = "getsystemresource";
+    req.command = CMD_GET_SYSTEM_RESOURCE;
     auto resp = sendAndReceive(req.dump());
     if (!resp) {
         return {};
@@ -114,7 +114,7 @@ std::optional<int> Client::getBatteryPercentage() {
 Bitmap::Ptr Client::getBitmapData(float x, float y, float width, float height, MapKind kind) {
     msg::GetMapDataRequest req;
     req.request_id = id_dist_(rng_);
-    req.command = "getmapdata";
+    req.command = CMD_GET_MAP_DATA;
     req.args.area.x = x;
     req.args.area.y = y;
     req.args.area.width = width;
@@ -159,7 +159,7 @@ Bitmap::Ptr Client::getBitmapData(float x, float y, float width, float height, M
 std::optional<int> Client::getBoardTemperature() {
     msg::SimpleRequest req;
     req.request_id = id_dist_(rng_);
-    req.command = "getsystemresource";
+    req.command = CMD_GET_SYSTEM_RESOURCE;
     auto resp = sendAndReceive(req.dump());
     if (!resp) {
         return {};
@@ -176,7 +176,7 @@ std::optional<int> Client::getBoardTemperature() {
 std::optional<int> Client::getDcInConnected() {
     msg::SimpleRequest req;
     req.request_id = id_dist_(rng_);
-    req.command = "getsystemresource";
+    req.command = CMD_GET_SYSTEM_RESOURCE;
     auto resp = sendAndReceive(req.dump());
     if (!resp) {
       return {};
@@ -193,7 +193,7 @@ std::optional<int> Client::getDcInConnected() {
 std::optional<int> Client::getIsCharging() {
     msg::SimpleRequest req;
     req.request_id = id_dist_(rng_);
-    req.command = "getsystemresource";
+    req.command = CMD_GET_SYSTEM_RESOURCE;
     auto resp = sendAndReceive(req.dump());
     if (!resp) {
         return {};
@@ -210,7 +210,7 @@ std::optional<int> Client::getIsCharging() {
 std::optional<cv::Rect_<float>> Client::getKnownArea(MapType type, MapKind kind) {
     msg::GetKnownAreaRequest req;
     req.request_id = id_dist_(rng_);
-    req.command = "getknownarea";
+    req.command = CMD_GET_KNOWN_AREA;
     req.args.type = static_cast<std::underlying_type_t<MapType>>(type);
     req.args.kind = static_cast<std::underlying_type_t<MapKind>>(kind);
     auto resp = sendAndReceive(req.dump());
@@ -233,7 +233,7 @@ std::optional<cv::Rect_<float>> Client::getKnownArea(MapType type, MapKind kind)
 LaserScan::Ptr Client::getLaserScan() {
     msg::SimpleRequest req;
     req.request_id = id_dist_(rng_);
-    req.command = "getlaserscan";
+    req.command = CMD_GET_LASER_SCAN;
     auto resp = sendAndReceive(req.dump());
     if (!resp) {
         return {};
@@ -257,7 +257,7 @@ LaserScan::Ptr Client::getLaserScan() {
 std::optional<int> Client::getOnDock() {
     msg::SimpleRequest req;
     req.request_id = id_dist_(rng_);
-    req.command = "getsystemresource";
+    req.command = CMD_GET_SYSTEM_RESOURCE;
     auto resp = sendAndReceive(req.dump());
     if (!resp) {
         return {};
