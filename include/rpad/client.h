@@ -7,6 +7,8 @@
 
 
 #include <asio.hpp>
+#include <Eigen/Core>
+#include <Eigen/Geometry>
 #include <rpad/protocol.h>
 #include <rpad/types.h>
 
@@ -28,7 +30,9 @@ class Client {
     std::optional<int> getIsCharging();
     std::optional<cv::Rect_<float>> getKnownArea(MapType type, MapKind kind);
     LaserScan::Ptr getLaserScan();
+    std::optional<Eigen::Vector3d> getLocation();
     std::optional<int> getOnDock();
+    std::optional<Eigen::Isometry3d> getPose();
     std::optional<std::string> getSdpVersion();
 
   private:

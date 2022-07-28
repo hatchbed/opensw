@@ -120,6 +120,33 @@ components:
         - command
         - request_id
         - result
+    getLocationResponse:
+      type: object
+      properties:
+        command:
+          $ref: '#/components/schemas/command'
+        request_id:
+          $ref: '#/components/schemas/requestId'
+        result:
+          type: object
+          properties:
+            code:
+              type: integer
+            timestamp:
+              type: integer
+            x:
+              type: number
+            y:
+              type: number
+          required:
+            - timestamp
+            - x
+            - y
+      required:
+        - code
+        - command
+        - request_id
+        - result
     getMapDataRequest:
       type: object
       properties:
@@ -189,6 +216,43 @@ components:
             - timestamp
             - type
       required:
+        - command
+        - request_id
+        - result
+    getPoseResponse:
+      type: object
+      properties:
+        command:
+          $ref: '#/components/schemas/command'
+        request_id:
+          $ref: '#/components/schemas/requestId'
+        result:
+          type: object
+          properties:
+            code:
+              type: integer
+            pitch:
+              type: number
+            roll:
+              type: number
+            timestamp:
+              type: integer
+            x:
+              type: number
+            y:
+              type: number
+            yaw:
+              type: number
+          required:
+            - code
+            - pitch
+            - roll
+            - timestamp
+            - x
+            - y
+            - yaw
+      required:
+        - code
         - command
         - request_id
         - result

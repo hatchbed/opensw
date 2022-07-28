@@ -8,14 +8,7 @@
 
 #include <rpad/base64.h>
 #include <rpad/logger.h>
-#include <rpad/msg/GetKnownAreaRequest.h>
-#include <rpad/msg/GetKnownAreaResponse.h>
-#include <rpad/msg/GetLaserScanResponse.h>
-#include <rpad/msg/GetMapDataRequest.h>
-#include <rpad/msg/GetMapDataResponse.h>
-#include <rpad/msg/GetSdpVersionResponse.h>
-#include <rpad/msg/GetSystemResourceResponse.h>
-#include <rpad/msg/SimpleRequest.h>
+#include <rpad/msg/messages.h>
 
 using namespace spdlog;
 
@@ -254,6 +247,23 @@ LaserScan::Ptr Client::getLaserScan() {
     return scan;
 }
 
+std::optional<Eigen::Vector3d> Client::getLocation() {
+    msg::SimpleRequest req;
+    req.request_id = id_dist_(rng_);
+    req.command = CMD_GET_LOCATION;
+    auto resp = sendAndReceive(req.dump());
+    if (!resp) {
+        return {};
+    }
+    auto response = msg::GetLocationResponse::fromJson(*resp);
+    if (!response) {
+        error("Failed to parse response");
+        return {};
+    }
+
+    return Eigen::Vector3d{response->result.x, response->result.y, 0.0};
+}
+
 std::optional<int> Client::getOnDock() {
     msg::SimpleRequest req;
     req.request_id = id_dist_(rng_);
@@ -269,6 +279,31 @@ std::optional<int> Client::getOnDock() {
     }
 
     return response->result.on_dock;
+}
+
+std::optional<Eigen::Isometry3d> Client::getPose() {
+    msg::SimpleRequest req;
+    req.request_id = id_dist_(rng_);
+    req.command = CMD_GET_POSE;
+    auto resp = sendAndReceive(req.dump());
+    if (!resp) {
+        return {};
+    }
+    auto response = msg::GetPoseResponse::fromJson(*resp);
+    if (!response) {
+        error("Failed to parse response");
+        return {};
+    }
+
+    Eigen::Isometry3d pose = Eigen::Isometry3d::Identity();
+    pose.translation().x() = response->result.x;
+    pose.translation().y() = response->result.y;
+    Eigen::AngleAxisd roll(response->result.roll, Eigen::Vector3d::UnitX());
+    Eigen::AngleAxisd pitch(response->result.pitch, Eigen::Vector3d::UnitY());
+    Eigen::AngleAxisd yaw(response->result.yaw, Eigen::Vector3d::UnitZ());
+    pose.linear() = (yaw * pitch * roll).toRotationMatrix();
+
+    return pose;
 }
 
 std::optional<std::string> Client::sendAndReceive(const std::string& msg) {
