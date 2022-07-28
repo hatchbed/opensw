@@ -7,6 +7,7 @@ set(THREADS_PREFER_PTHREAD_FLAG ON)
 
 find_package(Asio REQUIRED)
 find_package(asyncapi_gencpp REQUIRED)
+find_package(Eigen3 REQUIRED)
 find_package(nlohmann_json REQUIRED)
 find_package(OpenCV REQUIRED core)
 find_package(spdlog REQUIRED)
@@ -18,6 +19,7 @@ include_directories(
     include
     ${CMAKE_CURRENT_BINARY_DIR}/include
     ${ASIO_INCLUDE_DIRS}
+    ${EIGEN3_INCLUDE_DIRS}
     ${OpenCV_INCLUDE_DIRS})
 
 add_library(${PROJECT_NAME} SHARED
@@ -68,6 +70,6 @@ install(
 install(FILES package.xml DESTINATION share/rpad)
 
 # pkg-config
-set(PKG_CONFIG_C_FLAGS "-I${OpenCV_INCLUDE_DIRS}")
+set(PKG_CONFIG_C_FLAGS "-I${OpenCV_INCLUDE_DIRS} -I${EIGEN3_INCLUDE_DIRS}")
 configure_file(pkg_config/rpad.pc.in ${CMAKE_CURRENT_BINARY_DIR}/rpad.pc @ONLY)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/rpad.pc DESTINATION lib/pkgconfig)
