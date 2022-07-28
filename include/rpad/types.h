@@ -3,6 +3,8 @@
 #include <memory>
 #include <vector>
 
+#include <Eigen/Core>
+#include <Eigen/Geometry>
 #include <opencv2/core/core.hpp>
 
 namespace rpad {
@@ -36,6 +38,13 @@ struct Bitmap {
     float resolution;
     MapKind kind;
     cv::Mat data;
+};
+
+struct ImuData {
+    Eigen::Vector3d acceleration;
+    Eigen::Vector3d angular_rate;
+    Eigen::Vector3d compass;
+    Eigen::Quaternion<double> orientation;
 };
 
 struct LaserPoint {

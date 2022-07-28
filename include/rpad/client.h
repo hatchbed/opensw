@@ -27,12 +27,14 @@ class Client {
     Bitmap::Ptr getBitmapData(float x, float y, float width, float height, MapKind kind);
     std::optional<int> getBoardTemperature();
     std::optional<int> getDcInConnected();
+    std::optional<ImuData> getImuData();
     std::optional<int> getIsCharging();
     std::optional<cv::Rect_<float>> getKnownArea(MapType type, MapKind kind);
     LaserScan::Ptr getLaserScan();
     std::optional<Eigen::Vector3d> getLocation();
     std::optional<int> getOnDock();
     std::optional<Eigen::Isometry3d> getPose();
+    std::optional<ImuData> getRawImuData();
     std::optional<std::string> getSdpVersion();
 
   private:
