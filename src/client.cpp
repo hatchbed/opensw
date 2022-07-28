@@ -183,6 +183,32 @@ std::optional<int> Client::getDcInConnected() {
     return response->result.dcin_connected;
 }
 
+std::optional<HealthStatus> Client::getHealthStatus() {
+    msg::SimpleRequest req;
+    req.request_id = id_dist_(rng_);
+    req.command = CMD_GET_ROBOT_HEALTH;
+    auto resp = sendAndReceive(req.dump());
+    if (!resp) {
+        return {};
+    }
+    auto response = msg::GetRobotHealthResponse::fromJson(*resp);
+    if (!response) {
+        error("Failed to parse response");
+        return {};
+    }
+
+    HealthStatus status;
+    status.has_depth_camera_disconnected = response->result.has_depth_camera_disconnected;
+    status.has_error = response->result.has_error;
+    status.has_fatal = response->result.has_fatal;
+    status.has_lidar_disconnected = response->result.has_lidar_disconnected;
+    status.has_sdp_disconnected = response->result.has_sdp_disconnected;
+    status.has_system_emergency_stop = response->result.has_system_emergency_stop;
+    status.has_warning = response->result.has_warning;
+
+    return status;
+}
+
 std::optional<ImuData> Client::getImuData() {
     msg::SimpleRequest req;
     req.request_id = id_dist_(rng_);
