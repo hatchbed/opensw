@@ -183,6 +183,29 @@ std::optional<int> Client::getDcInConnected() {
     return response->result.dcin_connected;
 }
 
+std::optional<ImuData> Client::getImuData() {
+    msg::SimpleRequest req;
+    req.request_id = id_dist_(rng_);
+    req.command = CMD_GET_IMU_IN_ROBOT_COORDINATE;
+    auto resp = sendAndReceive(req.dump());
+    if (!resp) {
+        return {};
+    }
+    auto response = msg::GetImuResponse::fromJson(*resp);
+    if (!response) {
+        error("Failed to parse response");
+        return {};
+    }
+
+    ImuData imu_data;
+    imu_data.acceleration = { response->result.acc.x, response->result.acc.y, response->result.acc.z };
+    imu_data.angular_rate = { response->result.gyro.x, response->result.gyro.y, response->result.gyro.z };
+    imu_data.compass = { response->result.compass.x, response->result.compass.y, response->result.compass.z };
+    imu_data.orientation = { response->result.quaternion.w, response->result.quaternion.x, response->result.quaternion.y, response->result.quaternion.z };
+
+    return imu_data;
+}
+
 std::optional<int> Client::getIsCharging() {
     msg::SimpleRequest req;
     req.request_id = id_dist_(rng_);
@@ -304,6 +327,29 @@ std::optional<Eigen::Isometry3d> Client::getPose() {
     pose.linear() = (yaw * pitch * roll).toRotationMatrix();
 
     return pose;
+}
+
+std::optional<ImuData> Client::getRawImuData() {
+    msg::SimpleRequest req;
+    req.request_id = id_dist_(rng_);
+    req.command = CMD_GET_IMU_IN_ROBOT_COORDINATE;
+    auto resp = sendAndReceive(req.dump());
+    if (!resp) {
+        return {};
+    }
+    auto response = msg::GetImuResponse::fromJson(*resp);
+    if (!response) {
+        error("Failed to parse response");
+        return {};
+    }
+
+    ImuData imu_data;
+    imu_data.acceleration = { response->result.raw_acc.x, response->result.raw_acc.y, response->result.raw_acc.z };
+    imu_data.angular_rate = { response->result.raw_gyro.x, response->result.raw_gyro.y, response->result.raw_gyro.z };
+    imu_data.compass = { response->result.raw_compass.x, response->result.raw_compass.y, response->result.raw_compass.z };
+    imu_data.orientation = { response->result.quaternion.w, response->result.quaternion.x, response->result.quaternion.y, response->result.quaternion.z };
+
+    return imu_data;
 }
 
 std::optional<std::string> Client::sendAndReceive(const std::string& msg) {

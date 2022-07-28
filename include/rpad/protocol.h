@@ -15,6 +15,7 @@ const float MAX_DISTANCE = 100.0f;
 const float MAX_ANGLE = M_PI + 0.01;
 
 // commands
+const std::string CMD_GET_IMU_IN_ROBOT_COORDINATE = "getimuinrobotcoordinate";
 const std::string CMD_GET_KNOWN_AREA = "getknownarea";
 const std::string CMD_GET_LASER_SCAN = "getlaserscan";
 const std::string CMD_GET_LOCATION = "getlocation";

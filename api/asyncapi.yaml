@@ -30,6 +30,54 @@ components:
         - getmapdata
         - getsdpversion
         - getsystemresource
+    getImuResponse:
+      type: object
+      properties:
+        command:
+          $ref: '#/components/schemas/command'
+        request_id:
+          $ref: '#/components/schemas/requestId'
+        result:
+          type: object
+          properties:
+            acc:
+              $ref: '#/components/schemas/vector3'
+            availibilityBitMap:
+              type: integer
+            code:
+              type: integer
+            compass:
+              $ref: '#/components/schemas/vector3'
+            gyro:
+              $ref: '#/components/schemas/vector3'
+            optional:
+              type: boolean
+            quaternion:
+              $ref: '#/components/schemas/quaternion'
+            raw_acc:
+              $ref: '#/components/schemas/vector3'
+            raw_compass:
+              $ref: '#/components/schemas/vector3'
+            raw_gyro:
+              $ref: '#/components/schemas/vector3'
+            timestamp:
+              type: integer
+          required:
+            - acc
+            - availibilityBitMap
+            - code
+            - compass
+            - gyro
+            - optional
+            - quaternion
+            - raw_acc
+            - raw_compass
+            - raw_gyro
+            - timestamp
+      required:
+        - command
+        - request_id
+        - result
     getKnownAreaRequest:
       type: object
       properties:
@@ -316,6 +364,25 @@ components:
         - command
         - request_id
         - result
+    quaternion:
+      type: object
+      properties:
+        w:
+          type: number
+        x:
+          type: number
+        y:
+          type: number
+        z:
+          type: number
+      required:
+        -w
+        -x
+        -y
+        -z
+    requestId:
+      type: integer
+      description: A unique request id
     simpleRequest:
       type: object
       properties:
@@ -326,6 +393,16 @@ components:
       required:
         - command
         - request_id
-    requestId:
-      type: integer
-      description: A unique request id
+    vector3:
+      type: object
+      properties:
+        x:
+          type: number
+        y:
+          type: number
+        z:
+          type: number
+      required:
+        -x
+        -y
+        -z
