@@ -27,6 +27,7 @@ class Client {
     Bitmap::Ptr getBitmapData(float x, float y, float width, float height, MapKind kind);
     std::optional<int> getBoardTemperature();
     std::optional<int> getDcInConnected();
+    std::optional<HealthStatus> getHealthStatus();
     std::optional<ImuData> getImuData();
     std::optional<int> getIsCharging();
     std::optional<cv::Rect_<float>> getKnownArea(MapType type, MapKind kind);

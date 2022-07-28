@@ -21,6 +21,7 @@ const std::string CMD_GET_LASER_SCAN = "getlaserscan";
 const std::string CMD_GET_LOCATION = "getlocation";
 const std::string CMD_GET_MAP_DATA = "getmapdata";
 const std::string CMD_GET_POSE = "getpose";
+const std::string CMD_GET_ROBOT_HEALTH = "getrobothealth";
 const std::string CMD_GET_SPD_VERSION = "getsdpversion";
 const std::string CMD_GET_SYSTEM_RESOURCE = "getsystemresource";
 

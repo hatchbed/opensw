@@ -25,9 +25,13 @@ components:
     command:
       type: string
       enum:
+        - getimuinrobotcoordinate
         - getlaserscan
+        - getlocation
         - getknownarea
         - getmapdata
+        - getpose
+        - getrobothealth
         - getsdpversion
         - getsystemresource
     getImuResponse:
@@ -187,11 +191,11 @@ components:
             y:
               type: number
           required:
+            - code
             - timestamp
             - x
             - y
       required:
-        - code
         - command
         - request_id
         - result
@@ -300,7 +304,48 @@ components:
             - y
             - yaw
       required:
-        - code
+        - command
+        - request_id
+        - result
+    getRobotHealthResponse:
+      type: object
+      properties:
+        command:
+          $ref: '#/components/schemas/command'
+        request_id:
+          $ref: '#/components/schemas/requestId'
+        result:
+          type: object
+          properties:
+            code:
+              type: integer
+            hasDepthCameraDisconnected:
+              type: boolean
+            hasError:
+              type: boolean
+            hasFatal:
+              type: boolean
+            hasLidarDisconnected:
+              type: boolean
+            hasSdpDisconnected:
+              type: boolean
+            hasSystemEmergencyStop:
+              type: boolean
+            hasWarning:
+              type: boolean
+            timestamp:
+              type: integer
+          required:
+            - code
+            - hasDepthCameraDisconnected
+            - hasError
+            - hasFatal
+            - hasLidarDisconnected
+            - hasSdpDisconnected
+            - hasSystemEmergencyStop
+            - hasWarning
+            - timestamp
+      required:
         - command
         - request_id
         - result

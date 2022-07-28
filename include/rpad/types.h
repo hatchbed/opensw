@@ -40,6 +40,16 @@ struct Bitmap {
     cv::Mat data;
 };
 
+struct HealthStatus {
+    bool has_depth_camera_disconnected;
+    bool has_error;
+    bool has_fatal;
+    bool has_lidar_disconnected;
+    bool has_sdp_disconnected;
+    bool has_system_emergency_stop;
+    bool has_warning;
+};
+
 struct ImuData {
     Eigen::Vector3d acceleration;
     Eigen::Vector3d angular_rate;
