@@ -6,16 +6,14 @@ An official SDK is [available](https://www.slamtec.com/en/Support#rplidar-mapper
 but appears to be closed source.
 
 Note: For the standalone SlamTec lidar devices, an existing open source driver
-is already available: [rplidar](https://github.com/Slamtec/rplidar_ros), but
+is already available: [rplidar_ros](https://github.com/Slamtec/rplidar_ros), but
 this uses a different protocol than the mapper devices.
 
 Currently, the interface is only partially implemented to expose the lidar scan
-and IMU data as well as some of the mapping data.
-
-More of the interface provided by the official SDK can be easily added, as
-needed, since the protocol is straightforward JSON over TCP.  These additional
-interfaces appear to support their robotic platforms, which use the same
-protocol.
+and IMU data as well as some of the mapping data. More of the interface provided
+by the official SDK can be easily added, as needed, since the protocol is
+straightforward JSON over TCP.  These additional interfaces appear to support
+their robotic platforms, which use the same protocol.
 
 ## Build Dependencies
 
@@ -59,5 +57,5 @@ int main(int argc, char **argv) {
 This library is agnostic to ROS, but is packaged to work in a ROS1 or ROS2
 workspace.
 
-See [rpad_ros] for a simple ROS laser scan and IMU driver built by wrapping this
-SDK.
+See [rpad_ros](https://github.com/hatchbed/rpad_ros) for a simple ROS laser scan
+and IMU driver built by wrapping this SDK.
