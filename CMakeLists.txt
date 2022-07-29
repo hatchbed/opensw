@@ -37,10 +37,6 @@ add_executable(rpad_cli src/bin/rpad_cli.cpp)
 target_link_libraries(rpad_cli ${PROJECT_NAME})
 set_property(TARGET rpad_cli PROPERTY CXX_STANDARD 17)
 
-add_executable(rpad_scan_replay src/bin/rpad_scan_replay.cpp)
-target_link_libraries(rpad_scan_replay ${PROJECT_NAME})
-set_property(TARGET rpad_scan_replay PROPERTY CXX_STANDARD 17)
-
 # Tests
 enable_testing()
 find_package(GTest REQUIRED)
@@ -58,7 +54,7 @@ add_test(MapDataTests map_data_tests)
 
 
 install(
-    TARGETS ${PROJECT_NAME} rpad_cli rpad_scan_replay
+    TARGETS ${PROJECT_NAME} rpad_cli
     ARCHIVE DESTINATION lib
     LIBRARY DESTINATION lib)
 install(DIRECTORY include/ DESTINATION include)
