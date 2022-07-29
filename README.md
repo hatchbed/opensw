@@ -45,7 +45,7 @@ their robotic platforms, which use the same protocol.
 int main(int argc, char **argv) {
 
   rpad::Client client;
-  if (client.connect(host, port, 500)) {
+  if (client.connect("192.168.11.11", 1445, 500)) {
     auto scan = client.getLaserScan();
   }
 }
