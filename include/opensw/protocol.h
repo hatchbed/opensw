@@ -36,9 +36,9 @@
 #include <string>
 #include <vector>
 
-#include <rpad/types.h>
+#include <opensw/types.h>
 
-namespace rpad {
+namespace opensw {
 
 const std::string DELIM = "\n\r\n\r\n";
 const uint8_t RLE_HEADER_SIZE = 9;
@@ -98,4 +98,4 @@ std::vector<uint8_t> inflate(const std::string& base64_data);
  */
 std::vector<LaserPoint> parseLaserPoints(const std::string& base64_data, bool fill_gaps=false);
 
-}  // namespace rpad
+}  // namespace opensw

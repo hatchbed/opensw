@@ -37,8 +37,8 @@
 
 #include <boost/algorithm/string.hpp>
 #include <gtest/gtest.h>
-#include <rpad/base64.h>
-#include <rpad/protocol.h>
+#include <opensw/base64.h>
+#include <opensw/protocol.h>
 #include <spdlog/spdlog.h>
 
 using namespace spdlog;
@@ -60,9 +60,9 @@ TEST_P(ScanDataTest, ParseTest) {
 
     ASSERT_FALSE(line.empty());
 
-    auto points = rpad::parseLaserPoints(line);
+    auto points = opensw::parseLaserPoints(line);
 
-    std::vector<rpad::LaserPoint> expected_points;
+    std::vector<opensw::LaserPoint> expected_points;
     while (std::getline(data_file, line)) {
         // skip blank or comment lines
         if (line.empty() || line[0] == '#') {
@@ -72,7 +72,7 @@ TEST_P(ScanDataTest, ParseTest) {
         std::vector<std::string> values;
         boost::split(values, line, boost::is_any_of(" "));
         ASSERT_EQ(3, values.size());
-        rpad::LaserPoint point;
+        opensw::LaserPoint point;
         point.distance = std::stof(values[0]);
         point.angle = std::stof(values[1]);
         point.valid = std::stoi(values[2]);
