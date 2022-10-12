@@ -2,8 +2,8 @@ prefix=@CMAKE_INSTALL_PREFIX@
 libdir=${prefix}/lib
 includedir=${prefix}/include
 
-Name: rpad
+Name: opensw
 Description: Open client SDK for communicating with SlamTec rpos framework devices such as the M2M1 mapper.
-Version: @rpad_version@
-Libs: -L${libdir} -lrpad 
+Version: @opensw_version@
+Libs: -L${libdir} -lopensw 
 Cflags: @PKG_CONFIG_C_FLAGS@ -I${includedir}
