@@ -6,7 +6,7 @@
  * See README for more details.
  */
 
-#include <rpad/base64.h>
+#include <opensw/base64.h>
 
 #include <cstdlib>
 #include <cstring>
@@ -15,7 +15,7 @@
 #define os_malloc(x) static_cast<unsigned char*>(malloc(x))
 #define os_memset(x, y, z) memset(x, y, z)
 
-namespace rpad {
+namespace opensw {
 
 static const unsigned char base64_table[65] =
   "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
@@ -160,4 +160,4 @@ unsigned char * base64_decode(const unsigned char *src, size_t len,
   return out;
 }
 
-}  // namespace rpad
+}  // namespace opensw

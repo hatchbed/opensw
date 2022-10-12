@@ -29,7 +29,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <rpad/client.h>
+#include <opensw/client.h>
 
 #include <chrono>
 #include <iostream>
@@ -37,13 +37,13 @@
 #include <boost/bind.hpp>
 #include <boost/date_time/posix_time/posix_time_types.hpp>
 
-#include <rpad/base64.h>
-#include <rpad/logger.h>
-#include <rpad/msg/messages.h>
+#include <opensw/base64.h>
+#include <opensw/logger.h>
+#include <opensw/msg/messages.h>
 
 using namespace spdlog;
 
-namespace rpad {
+namespace opensw {
 
 Client::Client() :
     socket_(io_context_),
@@ -455,7 +455,7 @@ void Client::checkDeadline(const std::error_code& err) {
     }
 }
 
-}  // namespace rpad
+}  // namespace opensw
 
 
 

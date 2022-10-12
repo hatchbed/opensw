@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="3">
-  <name>rpad</name>
+  <name>opensw</name>
   <version>0.1.0</version>
   <description>Open SDK for communicating with SlamTec Slamware devices such as the M2M1 mapper.</description>
 

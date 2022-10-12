@@ -37,8 +37,8 @@
 
 #include <boost/algorithm/string.hpp>
 #include <gtest/gtest.h>
-#include <rpad/protocol.h>
-#include <rpad/msg/GetMapDataResponse.h>
+#include <opensw/protocol.h>
+#include <opensw/msg/GetMapDataResponse.h>
 #include <spdlog/spdlog.h>
 
 using namespace spdlog;
@@ -60,10 +60,10 @@ TEST_P(MapDataTest, ParseGetMapDataResponse) {
 
     ASSERT_FALSE(line.empty());
 
-    auto response = rpad::msg::GetMapDataResponse::fromJson(line);
+    auto response = opensw::msg::GetMapDataResponse::fromJson(line);
     ASSERT_TRUE(response);
 
-    auto map_data = rpad::inflate(response->result.map_data);
+    auto map_data = opensw::inflate(response->result.map_data);
 }
 
 INSTANTIATE_TEST_CASE_P(

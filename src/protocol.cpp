@@ -29,17 +29,17 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <rpad/protocol.h>
+#include <opensw/protocol.h>
 
 #include <algorithm>
 #include <iostream>
 
-#include <rpad/base64.h>
-#include <rpad/logger.h>
+#include <opensw/base64.h>
+#include <opensw/logger.h>
 
 using namespace spdlog;
 
-namespace rpad {
+namespace opensw {
 
 std::vector<uint8_t> inflate(const std::string& base64_data) {
     debug("Inflating data ...");
@@ -239,4 +239,4 @@ std::vector<LaserPoint> parseLaserPoints(const std::string& base64_data, bool fi
     return fixed_points;
 }
 
-}  // namespace rpad
+}  // namespace opensw

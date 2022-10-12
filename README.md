@@ -1,4 +1,4 @@
-# rpad
+# opensw
 Open source client SDK for communicating with SlamTec Slamware devices such as
 the [M2M1 mapper](https://www.slamtec.com/en/Lidar/Mapper) over ethernet.
 
@@ -40,11 +40,11 @@ their robotic platforms, which use the same protocol.
 
 ## Example Usage:
 ```
-#include <rpad/client.h>
+#include <opensw/client.h>
 
 int main(int argc, char **argv) {
 
-  rpad::Client client;
+  opensw::Client client;
   if (client.connect("192.168.11.11", 1445, 500)) {
     auto scan = client.getLaserScan();
   }
@@ -57,5 +57,5 @@ int main(int argc, char **argv) {
 This library is agnostic to ROS, but is packaged to work in a ROS1 or ROS2
 workspace.
 
-See [rpad_ros](https://github.com/hatchbed/rpad_ros) for a simple ROS laser scan
+See [opensw_ros](https://github.com/hatchbed/opensw_ros) for a simple ROS laser scan
 and IMU driver built by wrapping this SDK.

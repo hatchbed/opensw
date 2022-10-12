@@ -39,7 +39,7 @@
 #include <Eigen/Geometry>
 #include <opencv2/core/core.hpp>
 
-namespace rpad {
+namespace opensw {
 
 enum class MapType {
     Bitmap8Bit = 0,
@@ -105,4 +105,4 @@ struct LaserScan {
     std::vector<LaserPoint> points;
 };
 
-}  // namespace rpad
+}  // namespace opensw

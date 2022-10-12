@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(rpad VERSION 0.1.0)
+project(opensw VERSION 0.1.0)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
@@ -33,9 +33,9 @@ target_link_libraries(${PROJECT_NAME}
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
 add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_gencpp)
 
-add_executable(rpad_cli src/bin/rpad_cli.cpp)
-target_link_libraries(rpad_cli ${PROJECT_NAME})
-set_property(TARGET rpad_cli PROPERTY CXX_STANDARD 17)
+add_executable(opensw_cli src/bin/opensw_cli.cpp)
+target_link_libraries(opensw_cli ${PROJECT_NAME})
+set_property(TARGET opensw_cli PROPERTY CXX_STANDARD 17)
 
 # Tests
 enable_testing()
@@ -54,7 +54,7 @@ add_test(MapDataTests map_data_tests)
 
 
 install(
-    TARGETS ${PROJECT_NAME} rpad_cli
+    TARGETS ${PROJECT_NAME} opensw_cli
     ARCHIVE DESTINATION lib
     LIBRARY DESTINATION lib)
 install(DIRECTORY include/ DESTINATION include)
@@ -63,9 +63,9 @@ install(
     DESTINATION include/${PROJECT_NAME}
     FILES_MATCHING PATTERN "*.h"
 )
-install(FILES package.xml DESTINATION share/rpad)
+install(FILES package.xml DESTINATION share/opensw)
 
 # pkg-config
 set(PKG_CONFIG_C_FLAGS "-I${OpenCV_INCLUDE_DIRS} -I${EIGEN3_INCLUDE_DIRS}")
-configure_file(pkg_config/rpad.pc.in ${CMAKE_CURRENT_BINARY_DIR}/rpad.pc @ONLY)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/rpad.pc DESTINATION lib/pkgconfig)
+configure_file(pkg_config/opensw.pc.in ${CMAKE_CURRENT_BINARY_DIR}/opensw.pc @ONLY)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/opensw.pc DESTINATION lib/pkgconfig)

@@ -1,18 +1,18 @@
 #include <iostream>
 
-#include <rpad/client.h>
-#include <rpad/logger.h>
+#include <opensw/client.h>
+#include <opensw/logger.h>
 
 using namespace spdlog;
 
 int main(int argc, char* argv[]) {
 
     if (argc != 3) {
-      std::cerr << "Usage: rpad_cli <host> <port>\n";
+      std::cerr << "Usage: opensw_cli <host> <port>\n";
       return 1;
     }
 
-    rpad::Client client;
+    opensw::Client client;
     if (!client.connect(argv[1], std::stoi(argv[2]), 500)) {
       error("Failed to connect to device.");
       return 1;
@@ -61,7 +61,7 @@ int main(int argc, char* argv[]) {
       std::cout << "On Dock: Unknown\n";
     }
 
-    auto explorer_map = client.getBitmapData(-1, -1, 2, 2, rpad::MapKind::EXPLORERMAP);
+    auto explorer_map = client.getBitmapData(-1, -1, 2, 2, opensw::MapKind::EXPLORERMAP);
     if (explorer_map) {
       std::cout << "Explorer Map: \n";
       std::cout << "  x: " << explorer_map->rect.x << "\n";
@@ -74,7 +74,7 @@ int main(int argc, char* argv[]) {
     }
 
     return 0;
-    auto known_explorer_area = client.getKnownArea(rpad::MapType::Bitmap8Bit, rpad::MapKind::EXPLORERMAP);
+    auto known_explorer_area = client.getKnownArea(opensw::MapType::Bitmap8Bit, opensw::MapKind::EXPLORERMAP);
     if (known_explorer_area) {
       std::cout << "Known Area (Explorer Map):\n";
       std::cout << "  x: " << known_explorer_area->x << "\n";

@@ -39,10 +39,10 @@
 #include <asio.hpp>
 #include <Eigen/Core>
 #include <Eigen/Geometry>
-#include <rpad/protocol.h>
-#include <rpad/types.h>
+#include <opensw/protocol.h>
+#include <opensw/types.h>
 
-namespace rpad {
+namespace opensw {
 
 /**
  * Primary class used to communicate with device.
@@ -211,4 +211,4 @@ class Client {
     bool connection_failed_ = false;
 };
 
-}  // namespace rpad
+}  // namespace opensw
